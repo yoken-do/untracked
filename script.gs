@@ -1,3 +1,5 @@
+const SHEET_URL = "";
+const LIST_NAME = "";
 
 // Триггер doGet(e) запускается автоматически, 
 // когда пользователь посещает веб-приложение 
@@ -10,8 +12,7 @@ function doGet(e)
 // Функция добавления строки
 function addEntry(name) // передаем один параметр
 {
-  let url = ''; // Google Sheet URL
-  var spread = SpreadsheetApp.openByUrl(url);
-  var webAppSheet = spread.getSheetByName("LIST_NAME");
+  var spread = SpreadsheetApp.openByUrl(SHEET_URL);
+  var webAppSheet = spread.getSheetByName(LIST_NAME);
   webAppSheet.appendRow([name]);
 }
