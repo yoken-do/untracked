@@ -3,7 +3,7 @@
 
   <div id="text-data">
 
-    <input id="title" placeholder="Название" />
+    <input id="title" placeholder="Название" autocomplete="off" />
     <textarea id="feedback" placeholder="Расскажите нам больше об этом месте"></textarea>
     
     <label class="custom-upload">
@@ -14,10 +14,12 @@
     <span>
 
       <button id="submit">Отправить</button>
-      <a href="./about">О проекте</a>
-
-
+      <a href="./about.html">О проекте</a>
     </span>
+  </div>
+
+  <div id="map-data">
+    <iframe src="" width="640" height="500"></iframe>
   </div>
 
 </main>
@@ -29,7 +31,6 @@
 {
   --txt-color: #f0f0f0;
   --bgcolor: #1b1b1b;
-  --btn-color: #ffa281;
 }
 
 *
@@ -43,6 +44,16 @@
 body
 {
   padding: 64px 32px;
+}
+
+main
+{
+  display: flex;
+}
+
+#map-data
+{
+ padding: 20px; 
 }
 
 #text-data
@@ -75,6 +86,12 @@ input
 {
   color: var(--txt-color);
   font-size: 28px;
+}
+
+#text-data > input[id="title"]:autofill
+{
+  color: var(--txt-color);
+  background: var(--bgcolor);
 }
 
 main, #text-data
