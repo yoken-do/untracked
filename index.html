@@ -1,90 +1,175 @@
+<script src="https://api-maps.yandex.ru/2.1/?apikey="></script>
 
-<title>Untracked</title>
+<script>
+ymaps.ready(init);
 
-<main>
+function init() {
+  const map = new ymaps.Map("map", {
+    center: [53.405327, 107.673049],
+    zoom: 6
+  });
+  
+  map.events.add('click', function (e) {
+    const coords = e.get('coords');
+    console.log(coords);
+  });
+}
+</script>
 
-<input id='title' placeholder="Название" autocomplete="off"/>
-<textarea id="comment" placeholder="Расскажите нам больше об этом месте"></textarea>
-<p></p>
+<div id="title">
 
-<div id="map"></div>
+  <main>
+    <h2>Untracked</h2>
+    <p>Проект для сбора сведений о местах отдыха дикого туризма на Байкале</p>
 
-<label class="custom-upload">
-    <input type="file" id="photoUpload" multiple accept="image/*" />
-    <span>Upload photo</span>
-</label>
+    <span class="select-but">
+      <a class="but" href="#join">Присоединиться</a>
+    <a class="but" href="#about">Подробнее</a>
+    </span>
 
-<button id="submit">Отправить</button>
+  </main>
 
-</main>
+</div>
+
+<div id="join">
+
+  <main>
+    <h2>Выберите место на карте или создайте своё</h2>
+    
+    <div id="map"></div>
+
+    <span class="select-but">
+      <a class="but" href="#comment">Дальше</a>
+      <a class="but" href="#title">Вернуться на главную</a>
+    </span>
+
+  </main>
+
+</div>
+
+<div id="setname">
+
+  <main>
+    <h2>Дайте название</h2>
+    <input id="place-name" placeholder="Запишите сюда" />
+
+    <span class="select-but">
+      <a class="but" href="#comment">Дальше</a>
+      <a class="but" href="#title">Вернуться на главную</a>
+    </span>
+
+  </main>
+
+</div>
+
+<div id="comment">
+
+  <main>
+    <h2>Поделитесь своими впечатлениями</h2>
+    <textarea id="text-comment" placeholder="Расскажите нам больше об этом месте"></textarea>
+
+    <div class="reactions">
+
+      <input id=like type='radio' name='reaction' required>
+      <label class="react" for="like">🔥</label>
+      <input id=norm type='radio' name='reaction' required>
+      <label class="react" for="norm">😐</label>
+      <input id=fu type='radio' name='reaction' required>
+      <label class="react" for="fu">💀</label>
+
+    </div>
+
+    <span class="select-but">
+      <a class="but" href="#photos">Дальше</a>
+      <a class="but" href="#title">Вернуться на главную</a>
+    </span>
+
+  </main>
+
+</div>
+
+<div id="photos">
+
+  <main>
+    <h2>Прикрепите фотографии</h2>
+    <p>По желанию</p>
+    
+    <label class="custom-upload">
+        <input type="file" id="photoUpload" multiple accept="image/*" />
+        <span>Upload photo</span>
+    </label>
+
+    <span class="select-but">
+      <a class="but" href="#comment">Дальше</a>
+      <a class="but" href="#title">Вернуться на главную</a>
+    </span>
+
+  </main>
+
+</div>
+
+<script>
+
+    document.querySelector(".custom-upload input").addEventListener(
+    "change", function(e)
+    {
+      const fileName = e.target.files.length ? `Upload ${e.target.files.length} files` : "Upload photo";
+      this.parentElement.querySelector('span').textContent = fileName;
+    }
+  )
+
+</script>
+
+<div id="about">
+
+  <main>
+    <h2>Присоединиться</h2>
+    <p>Над проектом `Untracked` работают студенты</p>
+
+    <span class="select-but">
+      <a class="but" href="#title">Вернуться на главную</a>
+    </span>
+
+  </main>
+
+</div>
 
 <style>
 
-      @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
      :root
       {
-        --txt-color: #1b1b1b;
-        /* --bgcolor: #fff; */
+        --txt-color: #f0f0f0;
+        --bgcolor: #100f0f;
       }
 
-      *
+      *:not(ymaps)
       {
         font-family: 'Jost';
-        background-color: var(--bgcolor);
         color: var(--txt-color);
+        background-color: var(--bgcolor);
       }
 
-
-body
+::selection
 {
-display: flex;
-justify-content: center;
+  color: var(--bgcolor);
+  background-color: var(--txt-color);
 }
 
-main
-{
-    width: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-input[id="title"]
-      {
-        font-size: 40px;
-        border: none;
-        padding: 10px;
-        width: 100%;
-      }
-
-      input[id="title"]:focus
-{
-  border: none;
-  outline: none;
-}
-
-
-textarea[id="comment"]
+#place-name
 {
   font-size: 20px;
   border: none;
   padding: 10px;
-  height: 200px;
-  resize: none;
   width: 100%;
 }
 
-textarea[id="comment"]:focus
+body
 {
-  border: none;
-  outline: none;
-}
-
-#map
-{
-    height: 280px;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .custom-upload > input[id="photoUpload"]
@@ -104,7 +189,7 @@ textarea[id="comment"]:focus
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50px;
+  height: 100px;
 }
 
 .custom-upload:hover
@@ -112,50 +197,96 @@ textarea[id="comment"]:focus
   cursor: pointer;
 }
 
-#submit
-{
-  border: 1px solid var(--txt-color);
-  background: var(--bgcolor);
-  font-size: 18px;
-  padding: 10px 35px;
-  margin: 20px;
-  transition: background 0.5s ease, color 0.5s ease;
+
+html {
+scroll-behavior:smooth;
+overflow-y:hidden;
 }
 
-#submit:hover
+#title, #join, #about, #comment, #photos, #setname
+{
+  height: 100%;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="radio"]
+{
+  display: none;
+}
+
+.react
+{
+  font-size: 25px;
+  margin: 0 15px;
+  padding: 8px;
+  transition: border 0.3 ease;
+  border: 1px solid transparent;
+}
+
+.react:hover
 {
   cursor: pointer;
 }
 
+input[type="radio"]:checked + label
+{
+  border: 2px solid var(--txt-color);
+}
+
+main
+{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.select-but
+{
+  display: flex;
+  width: 90%;
+  margin-top: 25px;
+  justify-content: space-around;
+}
+
+.select-but > a
+{
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid var(--txt-color);
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+h2, p
+{
+  width: 100%;
+}
+
+#comment > main > textarea[id="text-comment"]
+{
+  font-size: 20px;
+  border: none;
+  padding: 10px;
+  height: 200px;
+  resize: none;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+span > a:hover
+{
+  color: var(--bgcolor);
+
+  background-color: var(--txt-color);
+}
+
 
 </style>
-
-<script>
-
-    document.querySelector(".custom-upload input").addEventListener(
-    "change", function(e)
-    {
-      const fileName = e.target.files.length ? `Upload ${e.target.files.length} files` : "Not upload";
-      this.parentElement.querySelector('span').textContent = fileName;
-    }
-  )
-
-</script>
-
-<script src="https://api-maps.yandex.ru/2.1/?"></script>
-
-<script>
-ymaps.ready(init);
-
-function init() {
-  const map = new ymaps.Map("map", {
-    center: [53.405327, 107.673049],
-    zoom: 6
-  });
-  
-  map.events.add('click', function (e) {
-    const coords = e.get('coords');
-    console.log(coords);
-  });
-}
-</script>
