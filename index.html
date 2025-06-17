@@ -100,9 +100,20 @@ function init() {
     </label>
 
     <span class="select-but">
-      <a class="but" href="#comment">Дальше</a>
+      <a class="but" href="#send">Дальше</a>
       <a class="but" href="#title">Вернуться на главную</a>
     </span>
+
+  </main>
+
+</div>
+
+<div id="send">
+
+  <main>
+    <h2 align="center">Всё? Да, это так!</h2>
+
+    <button id="submit">Отправить</button>
 
   </main>
 
@@ -203,7 +214,7 @@ scroll-behavior:smooth;
 overflow-y:hidden;
 }
 
-#title, #join, #about, #comment, #photos, #setname
+#title, #join, #about, #comment, #photos, #setname, #send
 {
   height: 100%;
   width: 500px;
@@ -250,6 +261,24 @@ main
   width: 90%;
   margin-top: 25px;
   justify-content: space-around;
+}
+
+#submit
+{
+  border: 2px solid var(--txt-color);
+  font-size: 18px;
+  border-radius: 5px;
+  width: 204px;
+  height: 44px;
+  padding: 0;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+#submit:hover
+{
+  cursor: pointer;
+  background-color: var(--txt-color);
+  color: var(--bgcolor);
 }
 
 .select-but > a
