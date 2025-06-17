@@ -15,7 +15,7 @@ _Приложение создаём и развертываем на Google Scr
 - https://docs.maptiler.com/sdk-js/examples/geocoding-reverse-json/
 
 ## Запуск
-1. Перекинуть файл `script.gs` в директорию Google Drive.
+1. Перекинуть файлы `script.gs`, `index.html`, `about.html` в директорию Google Drive.
 2. Создать таблицу в Google Sheets.
 3. Скопировать url таблицы и название листа
 4. Вставить их в соответствующие поля

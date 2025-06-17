@@ -1,186 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <!-- Навигация -->
+    <main>
+      <nav>
+      <button onclick="showPage('home')">Главная</button>
+      <button onclick="showPage('about')">О проекте</button>
+      <button onclick="showPage('contact')">Контакты</button>
+    </nav>
 
-<main>
+    <!-- Страницы (изначально скрыты) -->
+    <div id="home-page" class="page">
+      <div class="data">
 
-  <div id="text-data">
-
-    <input id="title" placeholder="Название" autocomplete="off" />
-    <textarea id="feedback" placeholder="Расскажите нам больше об этом месте"></textarea>
-    
-    <label class="custom-upload">
-      <input type="file" id="photoUpload" multiple accept="image/*">
-      <span>Upload photo</span>
-    </label>
-    
-    <span>
+        <div class="text-data">
+            <input id="title" placeholder="Название" autocomplete="off" />
+            <textarea id="feedback" placeholder="Расскажите нам больше об этом месте"></textarea>
+            <label class="custom-upload">
+            <input type="file" id="photoUpload" multiple accept="image/*">
+            <span>Upload photo</span>
+          </label>
+        </div>
+        <div id="map-data">
+<iframe src="https://www.google.com/maps/d/embed?mid=1BNtyb1RiYPigiM_3FG-X8BaqsYqFmxw&ehbc=2E312F" width="640" height="480"></iframe>  </div>
+      </div>
 
       <button id="submit">Отправить</button>
-      <a href="./about.html">О проекте</a>
-    </span>
-  </div>
+    </div>
 
-  <div id="map-data">
-    <iframe src="" width="640" height="500"></iframe>
-  </div>
+    <div id="about-page" class="page" style="display:none;">
+      <h1>О нас</h1>
+      <p>Мы — лучшие!</p>
+    </div>
 
-</main>
+    <div id="contact-page" class="page" style="display:none;">
+      <h1>Контакты</h1>
+      <p>Пишите: example@mail.com</p>
+    </div>
+    </main>
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+    <style>
 
-:root
-{
-  --txt-color: #f0f0f0;
-  --bgcolor: #1b1b1b;
-}
+      @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
-*
-{
-  font-family: 'Jost';
-  background-color: var(--bgcolor);
-  color: var(--txt-color);
-}
+     :root
+      {
+        --txt-color: #f0f0f0;
+        --bgcolor: #1b1b1b;
+      }
 
+      *
+      {
+        font-family: 'Jost';
+        background-color: var(--bgcolor);
+        color: var(--txt-color);
+      }
 
-body
-{
-  padding: 64px 32px;
+      body
+      {
+          padding: 64px 32px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+      }
 
-main
-{
-  display: flex;
-}
+      nav > button
+      {
+        border: 1px solid var(--txt-color);
+        background: var(--bgcolor);
+        font-size: 18px;
+        padding: 10px 35px;
+        transition: background 0.5s ease, color 0.5s ease;
+      }
 
-#map-data
-{
- padding: 20px; 
-}
+      nav > button:hover
+      {
+        cursor: pointer;
+  background: var(--txt-color);
+  color: var(--bgcolor);
+      }
 
-#text-data
-{
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-}
+      main
+      {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        width: 1000px;
+        align-items: center;
+      }
 
-input
-{
-  margin: 10px;
-}
+      .page
+      {
+        width: 100%;
+        padding: 20px 0;
+      }
 
-#text-data > input[id="title"]
-{
-  font-size: 40px;
-  border: none;
-  width: 100%;
-  padding: 10px;
-}
+      .data
+      {
+        width: 100%;
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
 
-#text-data > input[id="title"]:focus
+       #map-data
+       {
+        width: 48%;
+        display: flex;
+       }
+
+      .text-data
+      {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .text-data > input[id="title"]
+      {
+        font-size: 40px;
+        border: none;
+        padding: 10px;
+      }
+
+      .text-data > input[id="title"]:focus
 {
   border: none;
   outline: none;
 }
 
-#text-data > input[id="title"]::placeholder
+.text-data > input[id="title"]::placeholder
 {
   color: var(--txt-color);
   font-size: 28px;
 }
 
-#text-data > input[id="title"]:autofill
-{
-  color: var(--txt-color);
-  background: var(--bgcolor);
-}
-
-main, #text-data
-{
-  height: 100%;
-}
-
-#text-data > textarea[id="feedback"]
+.text-data > textarea[id="feedback"]
 {
   font-size: 20px;
-  margin: 10px;
   border: none;
-  width: 100%;
   padding: 10px;
   height: 300px;
   resize: none;
 }
 
-#text-data > textarea[id="feedback"]:focus
+.text-data > textarea[id="feedback"]:focus
 {
   border: none;
   outline: none;
 }
 
-#text-data > span
-{
-  padding: 10px;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-#text-data > span > #submit
-{
-  border: 1px solid var(--txt-color);
-  background: var(--bgcolor);
-  font-size: 18px;
-  padding: 10px 35px;
-  transition: background 0.5s ease, color 0.5s ease;
-}
-
-#text-data > span > #submit:hover
-{
-  cursor: pointer;
-  background: var(--txt-color);
-  color: var(--bgcolor);
-}
-
-#text-data > span > a
-{
-  margin-left: 15px;
-  border: 1px solid var(--txt-color);
-  background: var(--bgcolor);
-  font-size: 18px;
-  padding: 10px 35px;
-  transition: background 0.5s ease, color 0.5s ease;
-  text-decoration: none;
-}
-
-#text-data > span > a:hover
-{
-  cursor: pointer;
-  background: var(--txt-color);
-  color: var(--bgcolor);
-}
-
-#text-data > .custom-upload > input[id="photoUpload"]
+.text-data > .custom-upload > input[id="photoUpload"]
 {
   display: none;
 }
 
-#text-data > .custom-upload
+.text-data > .custom-upload
 {
   background: var(--bgcolor);
   font-size: 18px;
-  padding: 20px;
+  padding: 10px;
+  margin: 20px 10px;
   width: max-content;
+  border: 1px solid var(--txt-color);
+
 }
 
-#text-data > .custom-upload:hover
+.text-data > .custom-upload:hover
 {
   cursor: pointer;
 }
 
-</style>
+#home-page
+{
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+}
 
-<script>
+#home-page > #submit
+{
+  border: 1px solid var(--txt-color);
+  background: var(--bgcolor);
+  font-size: 18px;
+  padding: 10px 35px;
+  margin: 20px;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+#home-page > #submit:hover
+{
+  cursor: pointer;
+  background: var(--txt-color);
+  color: var(--bgcolor);
+}
+
+nav button:hover, #home-page > #submit:hover
+{
+  cursor: pointer;
+}
+
+    </style>
+
+    <script>
+      function showPage(pageId) {
+        // Скрываем все страницы
+        document.querySelectorAll('.page').forEach(page => {
+          page.style.display = 'none';
+        });
+        // Показываем выбранную
+        document.getElementById(pageId + '-page').style.display = 'block';
+      }
 
   document.querySelector(".custom-upload input").addEventListener(
     "change", function(e)
@@ -190,4 +220,6 @@ main, #text-data
     }
   )
 
-</script>
+    </script>
+  </body>
+</html>
