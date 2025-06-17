@@ -1,52 +1,50 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    <!-- Навигация -->
-    <main>
-      <nav>
-      <button onclick="showPage('home')">Главная</button>
-      <button onclick="showPage('about')">О проекте</button>
-      <button onclick="showPage('contact')">Контакты</button>
-    </nav>
 
-    <!-- Страницы (изначально скрыты) -->
-    <div id="home-page" class="page">
-      <div class="data">
+<title>Untracked</title>
 
-        <div class="text-data">
-            <input id="title" placeholder="Название" autocomplete="off" />
-            <textarea id="feedback" placeholder="Расскажите нам больше об этом месте"></textarea>
-            <label class="custom-upload">
-            <input type="file" id="photoUpload" multiple accept="image/*">
-            <span>Upload photo</span>
-          </label>
-        </div>
-        <div id="map-data">
-<iframe src="" width="640" height="480"></iframe>  </div>
-      </div>
+<main>
 
-      <button id="submit">Отправить</button>
-    </div>
+<input id='title' placeholder="Название" autocomplete="off"/>
+<textarea id="comment" placeholder="Расскажите нам больше об этом месте"></textarea>
+<p></p>
+<!-- <iframe id="map" src="https://www.google.com/maps/d/embed?mid=1BNtyb1RiYPigiM_3FG-X8BaqsYqFmxw&ehbc=2E312F"></iframe> -->
 
-    <div id="about-page" class="page" style="display:none;">
-      <h1>О нас</h1>
-      <p>о нас</p>
-    </div>
+<div id="map"></div>
 
-    <div id="contact-page" class="page" style="display:none;">
-      <h1>Контакты</h1>
-      <p>Пишите: example@mail.com</p>
-    </div>
-    </main>
+<label class="custom-upload">
+    <input type="file" id="photoUpload" multiple accept="image/*" />
+    <span>Upload photo</span>
+</label>
 
-    <style>
+<button id="submit">Отправить</button>
+
+</main>
+
+<script src="https://api-maps.yandex.ru/2.1/?apikey=7c06353c-8c90-43ad-b4ee-6d78ca37ce3d&lang=ru_RU"></script>
+
+<script>
+ymaps.ready(init);
+
+function init() {
+  const map = new ymaps.Map("map", {
+    center: [53.405327, 107.673049],
+    zoom: 6
+  });
+  
+  map.events.add('click', function (e) {
+    const coords = e.get('coords');
+    console.log(coords);
+  });
+}
+</script>
+
+<style>
 
       @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
      :root
       {
-        --txt-color: #f0f0f0;
-        --bgcolor: #1b1b1b;
+        --txt-color: #1b1b1b;
+        /* --bgcolor: #fff; */
       }
 
       *
@@ -56,129 +54,84 @@
         color: var(--txt-color);
       }
 
-      body
-      {
-          padding: 64px 32px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-      }
 
-      nav > button
-      {
-        border: 1px solid var(--txt-color);
-        background: var(--bgcolor);
-        font-size: 18px;
-        padding: 10px 35px;
-        transition: background 0.5s ease, color 0.5s ease;
-      }
+body
+{
+display: flex;
+justify-content: center;
+}
 
-      nav > button:hover
-      {
-        cursor: pointer;
-  background: var(--txt-color);
-  color: var(--bgcolor);
-      }
+main
+{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-      main
-      {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        width: 1000px;
-        align-items: center;
-      }
-
-      .page
-      {
-        width: 100%;
-        padding: 20px 0;
-      }
-
-      .data
-      {
-        width: 100%;
-        display:flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-      }
-
-       #map-data
-       {
-        width: 48%;
-        display: flex;
-       }
-
-      .text-data
-      {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .text-data > input[id="title"]
+input[id="title"]
       {
         font-size: 40px;
         border: none;
         padding: 10px;
+        width: 100%;
       }
 
-      .text-data > input[id="title"]:focus
+      input[id="title"]:focus
 {
   border: none;
   outline: none;
 }
 
-.text-data > input[id="title"]::placeholder
-{
-  color: var(--txt-color);
-  font-size: 28px;
-}
 
-.text-data > textarea[id="feedback"]
+textarea[id="comment"]
 {
   font-size: 20px;
   border: none;
   padding: 10px;
-  height: 300px;
+  height: 200px;
   resize: none;
+  width: 100%;
 }
 
-.text-data > textarea[id="feedback"]:focus
+textarea[id="comment"]:focus
 {
   border: none;
   outline: none;
 }
 
-.text-data > .custom-upload > input[id="photoUpload"]
+#map
+{
+    height: 280px;
+    width: 100%;
+}
+
+.custom-upload > input[id="photoUpload"]
 {
   display: none;
 }
 
-.text-data > .custom-upload
+.custom-upload
 {
   background: var(--bgcolor);
   font-size: 18px;
   padding: 10px;
   margin: 20px 10px;
-  width: max-content;
-  border: 1px solid var(--txt-color);
-
+  width: 100%;
+  border: 1px dashed var(--txt-color);
+  opacity: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
 }
 
-.text-data > .custom-upload:hover
+.custom-upload:hover
 {
   cursor: pointer;
 }
 
-#home-page
-{
-  display:flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-#home-page > #submit
+#submit
 {
   border: 1px solid var(--txt-color);
   background: var(--bgcolor);
@@ -188,31 +141,17 @@
   transition: background 0.5s ease, color 0.5s ease;
 }
 
-#home-page > #submit:hover
-{
-  cursor: pointer;
-  background: var(--txt-color);
-  color: var(--bgcolor);
-}
-
-nav button:hover, #home-page > #submit:hover
+#submit:hover
 {
   cursor: pointer;
 }
 
-    </style>
 
-    <script>
-      function showPage(pageId) {
-        // Скрываем все страницы
-        document.querySelectorAll('.page').forEach(page => {
-          page.style.display = 'none';
-        });
-        // Показываем выбранную
-        document.getElementById(pageId + '-page').style.display = 'block';
-      }
+</style>
 
-  document.querySelector(".custom-upload input").addEventListener(
+<script>
+
+    document.querySelector(".custom-upload input").addEventListener(
     "change", function(e)
     {
       const fileName = e.target.files.length ? `Upload ${e.target.files.length} files` : "Not upload";
@@ -220,6 +159,4 @@ nav button:hover, #home-page > #submit:hover
     }
   )
 
-    </script>
-  </body>
-</html>
+</script>
