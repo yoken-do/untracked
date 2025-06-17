@@ -6,7 +6,6 @@
 <input id='title' placeholder="Название" autocomplete="off"/>
 <textarea id="comment" placeholder="Расскажите нам больше об этом месте"></textarea>
 <p></p>
-<!-- <iframe id="map" src="https://www.google.com/maps/d/embed?mid=1BNtyb1RiYPigiM_3FG-X8BaqsYqFmxw&ehbc=2E312F"></iframe> -->
 
 <div id="map"></div>
 
@@ -18,24 +17,6 @@
 <button id="submit">Отправить</button>
 
 </main>
-
-<script src="https://api-maps.yandex.ru/2.1/?apikey=7c06353c-8c90-43ad-b4ee-6d78ca37ce3d&lang=ru_RU"></script>
-
-<script>
-ymaps.ready(init);
-
-function init() {
-  const map = new ymaps.Map("map", {
-    center: [53.405327, 107.673049],
-    zoom: 6
-  });
-  
-  map.events.add('click', function (e) {
-    const coords = e.get('coords');
-    console.log(coords);
-  });
-}
-</script>
 
 <style>
 
@@ -159,4 +140,22 @@ textarea[id="comment"]:focus
     }
   )
 
+</script>
+
+<script src="https://api-maps.yandex.ru/2.1/?"></script>
+
+<script>
+ymaps.ready(init);
+
+function init() {
+  const map = new ymaps.Map("map", {
+    center: [53.405327, 107.673049],
+    zoom: 6
+  });
+  
+  map.events.add('click', function (e) {
+    const coords = e.get('coords');
+    console.log(coords);
+  });
+}
 </script>
