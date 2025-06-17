@@ -1,0 +1,173 @@
+
+<main>
+
+  <div id="text-data">
+
+    <input id="title" placeholder="Название" />
+    <textarea id="feedback" placeholder="Расскажите нам больше об этом месте"></textarea>
+    
+    <label class="custom-upload">
+      <input type="file" id="photoUpload" multiple accept="image/*">
+      <span>Upload photo</span>
+    </label>
+    
+    <span>
+
+      <button id="submit">Отправить</button>
+      <a href="./about">О проекте</a>
+
+
+    </span>
+  </div>
+
+</main>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root
+{
+  --txt-color: #f0f0f0;
+  --bgcolor: #1b1b1b;
+  --btn-color: #ffa281;
+}
+
+*
+{
+  font-family: 'Jost';
+  background-color: var(--bgcolor);
+  color: var(--txt-color);
+}
+
+
+body
+{
+  padding: 64px 32px;
+}
+
+#text-data
+{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+input
+{
+  margin: 10px;
+}
+
+#text-data > input[id="title"]
+{
+  font-size: 40px;
+  border: none;
+  width: 100%;
+  padding: 10px;
+}
+
+#text-data > input[id="title"]:focus
+{
+  border: none;
+  outline: none;
+}
+
+#text-data > input[id="title"]::placeholder
+{
+  color: var(--txt-color);
+  font-size: 28px;
+}
+
+main, #text-data
+{
+  height: 100%;
+}
+
+#text-data > textarea[id="feedback"]
+{
+  font-size: 20px;
+  margin: 10px;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  height: 300px;
+  resize: none;
+}
+
+#text-data > textarea[id="feedback"]:focus
+{
+  border: none;
+  outline: none;
+}
+
+#text-data > span
+{
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#text-data > span > #submit
+{
+  border: 1px solid var(--txt-color);
+  background: var(--bgcolor);
+  font-size: 18px;
+  padding: 10px 35px;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+#text-data > span > #submit:hover
+{
+  cursor: pointer;
+  background: var(--txt-color);
+  color: var(--bgcolor);
+}
+
+#text-data > span > a
+{
+  margin-left: 15px;
+  border: 1px solid var(--txt-color);
+  background: var(--bgcolor);
+  font-size: 18px;
+  padding: 10px 35px;
+  transition: background 0.5s ease, color 0.5s ease;
+  text-decoration: none;
+}
+
+#text-data > span > a:hover
+{
+  cursor: pointer;
+  background: var(--txt-color);
+  color: var(--bgcolor);
+}
+
+#text-data > .custom-upload > input[id="photoUpload"]
+{
+  display: none;
+}
+
+#text-data > .custom-upload
+{
+  background: var(--bgcolor);
+  font-size: 18px;
+  padding: 20px;
+  width: max-content;
+}
+
+#text-data > .custom-upload:hover
+{
+  cursor: pointer;
+}
+
+</style>
+
+<script>
+
+  document.querySelector(".custom-upload input").addEventListener(
+    "change", function(e)
+    {
+      const fileName = e.target.files.length ? `Upload ${e.target.files.length} files` : "Not upload";
+      this.parentElement.querySelector('span').textContent = fileName;
+    }
+  )
+
+</script>
