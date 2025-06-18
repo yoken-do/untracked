@@ -1,4 +1,4 @@
-<script src="https://api-maps.yandex.ru/2.1/?apikey="></script>
+<script src=""></script>
 
 <script>
 ymaps.ready(init);
@@ -146,8 +146,11 @@ function init() {
 </div>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+</style>
 
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+<style>
+
 
      :root
       {
@@ -174,6 +177,20 @@ function init() {
   border: none;
   padding: 10px;
   width: 100%;
+}
+
+#map
+{
+  width: 640px;
+  height: 480px;
+}
+
+html, body, body > div 
+{
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 body
@@ -210,17 +227,19 @@ body
 
 
 html {
-scroll-behavior:smooth;
-overflow-y:hidden;
+scroll-behavior:smooth !important;
+overflow-y:hidden !important;
 }
 
 #title, #join, #about, #comment, #photos, #setname, #send
 {
-  height: 100%;
-  width: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  min-height: 100% !important;
+  max-height: 100% !important;
+  min-width: 500px !important;
+  max-width: 500px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 input[type="radio"]
