@@ -1,20 +1,5 @@
-<script src=""></script>
 
-<script>
-ymaps.ready(init);
-
-function init() {
-  const map = new ymaps.Map("map", {
-    center: [53.405327, 107.673049],
-    zoom: 6
-  });
-  
-  map.events.add('click', function (e) {
-    const coords = e.get('coords');
-    console.log(coords);
-  });
-}
-</script>
+<script src="https://api-maps.yandex.ru/2.1/?apikey=7c06353c-8c90-43ad-b4ee-6d78ca37ce3d&lang=ru_RU"></script>
 
 <div id="title">
 
@@ -22,73 +7,62 @@ function init() {
     <h2>Untracked</h2>
     <p>Проект для сбора сведений о местах отдыха дикого туризма на Байкале</p>
 
-    <span class="select-but">
-      <a class="but" href="#join">Присоединиться</a>
-    <a class="but" href="#about">Подробнее</a>
-    </span>
-
+    <a class="link" href="#join">Присоединиться</a>
+    <a class="link" href="#about">Подробнее</a>
   </main>
 
 </div>
 
-<div id="join">
+<div id="join" class="slide">
 
   <main>
     <h2>Выберите место на карте или создайте своё</h2>
     
     <div id="map"></div>
 
-    <span class="select-but">
-      <a class="but" href="#comment">Дальше</a>
-      <a class="but" href="#title">Вернуться на главную</a>
-    </span>
-
+    <button id="to-join" class="but">Дальше</button>
   </main>
 
 </div>
 
-<div id="setname">
+<div id="setname" class="slide">
 
   <main>
     <h2>Дайте название</h2>
     <input id="place-name" placeholder="Запишите сюда" />
 
-    <span class="select-but">
-      <a class="but" href="#comment">Дальше</a>
-      <a class="but" href="#title">Вернуться на главную</a>
-    </span>
+    <button id="to-comment" class="but">Создать</button>
+
 
   </main>
 
 </div>
 
-<div id="comment">
+<div id="comment" class="slide">
 
   <main>
     <h2>Поделитесь своими впечатлениями</h2>
-    <textarea id="text-comment" placeholder="Расскажите нам больше об этом месте"></textarea>
+    <textarea id="text-comment" placeholder="Расскажите нам больше об этом месте" required></textarea>
 
     <div class="reactions">
 
-      <input id=like type='radio' name='reaction' required>
+      <input id=like type='radio' name='reaction'>
       <label class="react" for="like">🔥</label>
-      <input id=norm type='radio' name='reaction' required>
+      <input id=norm type='radio' name='reaction'>
       <label class="react" for="norm">😐</label>
-      <input id=fu type='radio' name='reaction' required>
+      <input id=fu type='radio' name='reaction'>
       <label class="react" for="fu">💀</label>
 
     </div>
 
-    <span class="select-but">
-      <a class="but" href="#photos">Дальше</a>
-      <a class="but" href="#title">Вернуться на главную</a>
-    </span>
+    <button id="to-photos" class="but">Дальше</button>
+
 
   </main>
 
 </div>
 
-<div id="photos">
+<div id="photos" class="slide">
 
   <main>
     <h2>Прикрепите фотографии</h2>
@@ -99,37 +73,23 @@ function init() {
         <span>Upload photo</span>
     </label>
 
-    <span class="select-but">
-      <a class="but" href="#send">Дальше</a>
-      <a class="but" href="#title">Вернуться на главную</a>
-    </span>
+    <button id="to-send" class="but">Закончим?</button>
+
 
   </main>
 
 </div>
 
-<div id="send">
+<div id="send" class="slide">
 
   <main>
     <h2 align="center">Всё? Да, это так!</h2>
 
-    <button id="submit">Отправить</button>
+    <button id="submit" class="but">Отправить</button>
 
   </main>
 
 </div>
-
-<script>
-
-    document.querySelector(".custom-upload input").addEventListener(
-    "change", function(e)
-    {
-      const fileName = e.target.files.length ? `Upload ${e.target.files.length} files` : "Upload photo";
-      this.parentElement.querySelector('span').textContent = fileName;
-    }
-  )
-
-</script>
 
 <div id="about">
 
@@ -138,7 +98,7 @@ function init() {
     <p>Над проектом `Untracked` работают студенты</p>
 
     <span class="select-but">
-      <a class="but" href="#title">Вернуться на главную</a>
+      <a class="link" href="#title">Вернуться на главную</a>
     </span>
 
   </main>
@@ -231,7 +191,7 @@ scroll-behavior:smooth !important;
 overflow-y:hidden !important;
 }
 
-#title, #join, #about, #comment, #photos, #setname, #send
+.slide, #about, #title
 {
   min-height: 100% !important;
   max-height: 100% !important;
@@ -274,43 +234,43 @@ main
   align-items: center;
 }
 
-.select-but
-{
-  display: flex;
-  width: 90%;
-  margin-top: 25px;
-  justify-content: space-around;
-}
 
-#submit
+.but
 {
   border: 2px solid var(--txt-color);
   font-size: 18px;
   border-radius: 5px;
   width: 204px;
   height: 44px;
+  margin-top: 20px;
   padding: 0;
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-#submit:hover
+.but:hover
 {
   cursor: pointer;
   background-color: var(--txt-color);
   color: var(--bgcolor);
 }
 
-.select-but > a
-{
+.link {
   width: 200px;
   height: 40px;
   border-radius: 5px;
   border: 2px solid var(--txt-color);
   text-decoration: none;
   display: flex;
+  margin-top: 10px;
   justify-content: center;
   align-items: center;
   transition: background-color 0.5s ease, color 0.5s ease;
+} 
+
+.link:hover
+{
+  color: var(--bgcolor);
+  background-color: var(--txt-color);
 }
 
 h2, p
@@ -338,3 +298,121 @@ span > a:hover
 
 
 </style>
+
+<script>
+
+    document.querySelector(".custom-upload input").addEventListener(
+    "change", function(e)
+    {
+      const fileName = e.target.files.length ? `Upload ${e.target.files.length} files` : "Upload photo";
+      this.parentElement.querySelector('span').textContent = fileName;
+    }
+  );
+
+</script>
+
+<script>
+ymaps.ready(init);
+
+let coords = null;
+let targetCoords = null;
+let placeGlobal = null;
+let [place_name, comment, acoords, place_type, cost] = Array(5).fill(null);
+let [reaction, photos] = Array(2).fill(null);
+
+function init() {
+  const map = new ymaps.Map("map", {
+    center: [53.405327, 107.673049],
+    zoom: 6
+  });
+
+  google.script.run
+    .withSuccessHandler(function(data) {
+      for (let place of data) {
+        const placemark = new ymaps.Placemark([place[1], place[2]], {
+          balloonContent: place[0],
+          hintContent: place[0],
+        }, {
+          preset: 'islands#redDotIcon',
+          draggable: false
+        });
+        
+        placemark.events.add('click', function(e) {
+          if (placeGlobal) {
+            map.geoObjects.remove(placeGlobal);
+          }
+          targetCoords = e.get('target').geometry.getCoordinates();
+          coords = null;
+        });
+        
+        map.geoObjects.add(placemark);
+      }
+    })
+    .getList();
+
+  map.events.add('click', function(e) {
+    map.balloon.close();
+    targetCoords = null;
+    if (placeGlobal) {
+      map.geoObjects.remove(placeGlobal);
+    }
+    coords = e.get('coords');
+    placeGlobal = new ymaps.Placemark(coords, {
+      balloonContent: 'Where',
+      hintContent: 'Where',
+    }, {
+      preset: 'islands#redDotIcon',
+      draggable: false
+    });
+    map.geoObjects.add(placeGlobal);
+  });
+}
+
+document.getElementById("to-join").addEventListener(
+  "click", function(e)
+  {
+    if (coords != null && targetCoords == null) 
+    {
+      window.location.hash = "#setname";
+      acoords = coords;
+    } 
+    else if (targetCoords != null && coords == null)
+    {
+      window.location.hash = "#comment";
+      acoords = targetCoords;
+    }
+    else if(targetCoords == null && coords == null)
+    {
+      alert("Точка не выбрана. Выберите точку на карте.");
+      return;
+    }
+
+  }
+
+);
+
+  document.getElementById("to-comment").addEventListener("click", function(e){
+    place_name = document.getElementById("place-name").value.trim();
+    if(place_name)
+      window.location.hash = "#comment";
+    else
+    {
+      alert("Введите название места!");
+      return;
+    }
+  });
+
+  document.getElementById("to-photos").addEventListener("click", function(e){
+    comment = document.getElementById("text-comment").value.trim();
+    reaction = document.querySelector("input[name='reaction']:checked");
+    reaction = reaction ? reaction.id : null
+    
+    if(comment)
+      window.location.hash = "#photos";
+    else
+    {
+      alert("Введите комментарий!");
+      return;
+    }
+  });
+</script>
