@@ -1,5 +1,5 @@
 
-<script src="https://api-maps.yandex.ru/2.1/?apikey=7c06353c-8c90-43ad-b4ee-6d78ca37ce3d&lang=ru_RU"></script>
+<script src=""></script>
 
 <div id="title">
 
@@ -329,6 +329,7 @@ function init() {
   google.script.run
     .withSuccessHandler(function(data) {
       for (let place of data) {
+        coords = [place[1], place[2]];
         const placemark = new ymaps.Placemark([place[1], place[2]], {
           balloonContent: place[0],
           hintContent: place[0],
@@ -342,6 +343,7 @@ function init() {
             map.geoObjects.remove(placeGlobal);
           }
           targetCoords = e.get('target').geometry.getCoordinates();
+          place_name = place[0];
           coords = null;
         });
         
@@ -349,7 +351,6 @@ function init() {
       }
     })
     .getList();
-
   map.events.add('click', function(e) {
     map.balloon.close();
     targetCoords = null;
@@ -380,6 +381,7 @@ document.getElementById("to-join").addEventListener(
     {
       window.location.hash = "#comment";
       acoords = targetCoords;
+      alert(place_name);
     }
     else if(targetCoords == null && coords == null)
     {
