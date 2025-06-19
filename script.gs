@@ -10,9 +10,17 @@ function doGet(e)
 }
 
 // Функция добавления строки
-function addEntry(name) // передаем один параметр
+function addEntry(list) // передаем один параметр
 {
   var spread = SpreadsheetApp.openByUrl(SHEET_URL);
   var webAppSheet = spread.getSheetByName(LIST_NAME);
-  webAppSheet.appendRow([name]);
+  webAppSheet.appendRow(list);
+}
+
+// Функция для координат
+function getList()
+{
+  var spread = SpreadsheetApp.openByUrl(SHEET_URL);
+  var webAppSheet = spread.getSheetByName(LIST_NAME);
+  return webAppSheet.getDataRange().getValues();
 }
