@@ -36,7 +36,7 @@
     <textarea id="desc" placeholder="Введите описание"></textarea>
 
     <span>
-      <input id="cost" placeholder="Стоимость" type="number" />
+      <input id="cost" min="0" onkeydown="return event.key !== '-' && event.key !== '+' && event.key !== 'e'" placeholder="Стоимость" type="number" />
       <select id="place_type" title="Тип местности">
         <option>Лес</option>
         <option>Горы</option>
