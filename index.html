@@ -398,7 +398,7 @@ ymaps.ready(init);
 let coords = null;
 let targetCoords = null;
 let placeGlobal = null;
-let [place_name, comment, acoords, place_type, cost] = Array(5).fill(null);
+let [place_name, comment, acoords, place_type, cost, description] = Array(6).fill(null);
 let [reaction, photos] = Array(2).fill(null);
 
 function init() {
@@ -473,16 +473,32 @@ document.getElementById("to-join").addEventListener(
 
 );
 
-  document.getElementById("to-comment").addEventListener("click", function(e){
+document.getElementById("to-comment").addEventListener("click", function(e){
     place_name = document.getElementById("place-name").value.trim();
-    if(place_name)
+    cost = document.getElementById("cost").value;
+    description = document.getElementById("desc").value.trim();
+    if(place_name && cost && description)
       window.location.hash = "#comment";
     else
     {
-      alert("Введите название места!");
-      return;
+      if(!place_name)
+      {
+        alert("Введите название места!");
+        return;
+      }
+      else if(!cost)
+      {
+        alert("Введите стоимость!");
+        return;
+      }
+      else if(!description)
+      {
+        alert("Введите описание места!");
+        return;
+      }
+
     }
-  });
+
 
   document.getElementById("to-photos").addEventListener("click", function(e){
     comment = document.getElementById("text-comment").value.trim();
