@@ -455,7 +455,7 @@ function init() {
         map.geoObjects.add(placemark);
       }
     })
-    .getList();
+    .getPlaceList();
   map.events.add('click', function(e) {
     map.balloon.close();
     targetCoords = null;
@@ -554,7 +554,7 @@ document.getElementById("to-join").addEventListener(
         map2.geoObjects.add(placemark);
       }
     })
-    .getList();
+    .getPlaceList();
 }
 </script>
 
