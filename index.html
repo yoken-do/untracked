@@ -31,8 +31,48 @@
     <h2>Дайте название</h2>
     <input id="place-name" placeholder="Запишите сюда" />
 
+    <textarea id="desc" placeholder="Введите описание"></textarea>
+
+    <span>
+      <input id="cost" placeholder="Стоимость" type="number" />
+      <select id="place_type" title="Тип местности">
+        <option>Лес</option>
+        <option>Горы</option>
+        <option>Равнины</option>
+        <option>Холмы</option>
+        <option>Песочный пляж</option>
+        <option>Каменистый пляж</option>
+      </select>
+    </span>
+
     <button id="to-comment" class="but">Создать</button>
 
+
+  </main>
+
+</div>
+
+<div id="setname" class="slide">
+
+  <main>
+    <h2>Дайте название</h2>
+    <input id="place-name" placeholder="Запишите сюда" />
+
+    <textarea id="desc" placeholder="Введите описание"></textarea>
+
+    <span>
+      <input id="cost" placeholder="Стоимость" type="number" />
+      <select id="place_type" title="Тип местности">
+        <option>Лес</option>
+        <option>Горы</option>
+        <option>Равнины</option>
+        <option>Холмы</option>
+        <option>Песочный пляж</option>
+        <option>Каменистый пляж</option>
+      </select>
+    </span>
+
+    <button id="to-comment" class="but">Создать</button>
 
   </main>
 
@@ -56,6 +96,7 @@
     </div>
 
     <button id="to-photos" class="but">Дальше</button>
+</p>
 
 
   </main>
@@ -94,11 +135,26 @@
 <div id="about">
 
   <main>
-    <h2>Присоединиться</h2>
-    <p>Над проектом `Untracked` работают студенты</p>
+    <h2>Подробнее</h2>
+    <div id="map_about"></div>
+    <p>Над проектом `Untracked` работают студенты по заказу крутого университета.</p>
+    <span class="select-but">
+      <a class="link" href="#actual">Актуальность данных</a>
+    </span>
+
+  </main>
+
+</div>
+
+<div id="actual" class="slide">
+
+  <main>
+    <h2>Актуальность данных:</h2>
+    
+    <p>Свяжитесь с нами, если вы нашли несоответствие: <a href="#">yo</a></p>
 
     <span class="select-but">
-      <a class="link" href="#title">Вернуться на главную</a>
+      <a class="link" href="#title">Вернуться назад</a>
     </span>
 
   </main>
@@ -131,6 +187,49 @@
   background-color: var(--txt-color);
 }
 
+#setname > main > textarea[id="desc"]
+{
+  margin-top: 20px;
+  font-size: 20px;
+  border: none;
+  padding: 10px;
+  height: 200px;
+  resize: none;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#setname > main > span > select[id="place_type"]
+{
+  padding: 5px;
+  font-size: 20px;
+  border: 2px solid var(--txt-color);
+  border-radius: 5px;
+}
+
+#setname > main > span > select[id="place_type"]:hover
+{
+  cursor: pointer;
+}
+
+#setname > main > span > input[id="cost"]
+{
+  width: 200px;
+  font-size: 20px;
+  border: 2px solid var(--txt-color);
+  outline: none;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#setname > main > span > input[id="cost"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+#setname > main > span > input[id="cost"] {
+  -moz-appearance: textfield;
+}
+
 #place-name
 {
   font-size: 20px;
@@ -140,6 +239,12 @@
 }
 
 #map
+{
+  width: 640px;
+  height: 480px;
+}
+
+#map_about
 {
   width: 640px;
   height: 480px;
@@ -346,7 +451,7 @@ function init() {
           place_name = place[0];
           coords = null;
         });
-        
+        coords = null;
         map.geoObjects.add(placemark);
       }
     })
@@ -372,7 +477,7 @@ function init() {
 document.getElementById("to-join").addEventListener(
   "click", function(e)
   {
-    if (coords != null && targetCoords == null) 
+    if (coords != null && targetCoords == null)
     {
       window.location.hash = "#setname";
       acoords = coords;
@@ -418,3 +523,40 @@ document.getElementById("to-join").addEventListener(
     }
   });
 </script>
+
+<script>
+  ymaps.ready(init);
+  function init() {
+  const map2 = new ymaps.Map("map_about", {
+    center: [53.405327, 107.673049],
+    zoom: 6
+  });
+
+  google.script.run
+    .withSuccessHandler(function(data) {
+      for (let place of data) {
+        coords = [place[1], place[2]];
+        const placemark = new ymaps.Placemark(coords, {
+          balloonContent: place[0],
+          hintContent: place[0],
+        }, {
+          preset: 'islands#redDotIcon',
+          draggable: false
+        });
+        
+        placemark.events.add('click', function(e) {
+          if (placeGlobal) {
+            map2.geoObjects.remove(placeGlobal);
+          }
+          targetCoords = e.get('target').geometry.getCoordinates();
+          place_name = place[0];
+        });
+        map2.geoObjects.add(placemark);
+      }
+    })
+    .getList();
+}
+</script>
+
+
+
